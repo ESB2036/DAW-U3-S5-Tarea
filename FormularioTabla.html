@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Registro con Edad y Eliminación</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+    />
+    <link rel="stylesheet" href="./css/FormularioTabla.css" />
+  </head>
+  <body>
+    <div class="contenedor">
+      <li><a href="index.html">Ir al inicio</a></li>
+
+      <h1>Registro de Datos</h1>
+
+      <label for="cedula">Cédula:</label>
+      <input type="text" id="cedula" placeholder="Ingrese la cédula" />
+
+      <label for="nombre">Nombre:</label>
+      <input type="text" id="nombre" placeholder="Ingrese el nombre" />
+
+      <label for="apellido">Apellido:</label>
+      <input type="text" id="apellido" placeholder="Ingrese el apellido" />
+
+      <label for="fechaNacimiento">Fecha de nacimiento:</label>
+      <input type="date" id="fechaNacimiento" />
+
+      <button onclick="agregarFila()">Agregar a la tabla</button>
+
+      <table id="tablaDatos">
+        <thead>
+          <tr>
+            <th>Cédula</th>
+            <th>Nombre</th>
+            <th>Apellido</th>
+            <th>Fecha de nacimiento</th>
+            <th>Edad</th>
+            <th>Acciones</th>
+          </tr>
+        </thead>
+        <tbody>
+          <!-- Filas agregadas aparecerán aquí -->
+        </tbody>
+      </table>
+    </div>
+    <script src="./js/FormularioTabla.js"></script>
+  </body>
+</html>

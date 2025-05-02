@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Calculadora básica</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        background-color: #f4f4f4;
+        padding: 40px;
+      }
+
+      .contenedor {
+        background-color: #fff;
+        padding: 20px;
+        border-radius: 10px;
+        max-width: 400px;
+        margin: auto;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      }
+
+      h1 {
+        color: #333;
+        text-align: center;
+      }
+
+      label {
+        display: block;
+        margin-top: 15px;
+        font-weight: bold;
+      }
+
+      input[type="number"],
+      input[readonly],
+      select {
+        width: 100%;
+        padding: 10px;
+        margin-top: 5px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        font-size: 16px;
+        box-sizing: border-box;
+      }
+
+      button {
+        margin-top: 20px;
+        padding: 10px;
+        width: 100%;
+        font-size: 16px;
+        background-color: #007bff;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+      }
+
+      button:hover {
+        background-color: #0056b3;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="contenedor">
+      <li><a href="index.html">Ir al inicio</a></li>
+
+      <h1>Calculadora básica</h1>
+
+      <label for="numero1">Primer número:</label>
+      <input
+        type="number"
+        id="numero1"
+        placeholder="Ingrese el primer número"
+      />
+
+      <label for="numero2">Segundo número:</label>
+      <input
+        type="number"
+        id="numero2"
+        placeholder="Ingrese el segundo número"
+      />
+
+      <label for="operacion">Operación:</label>
+      <select id="operacion">
+        <option value="sumar">Sumar</option>
+        <option value="restar">Restar</option>
+        <option value="multiplicar">Multiplicar</option>
+        <option value="dividir">Dividir</option>
+      </select>
+
+      <button onclick="calcular()">Calcular</button>
+
+      <label for="resultado">Resultado:</label>
+      <input type="text" id="resultado" readonly />
+    </div>
+
+    <script>
+      function calcular() {
+        let num1 = parseFloat(document.getElementById("numero1").value) || 0;
+        let num2 = parseFloat(document.getElementById("numero2").value) || 0;
+        let operacion = document.getElementById("operacion").value;
+        let resultado;
+
+        switch (operacion) {
+          case "sumar":
+            resultado = num1 + num2;
+            break;
+          case "restar":
+            resultado = num1 - num2;
+            break;
+          case "multiplicar":
+            resultado = num1 * num2;
+            break;
+          case "dividir":
+            resultado = num2 !== 0 ? num1 / num2 : "Error: División por cero";
+            break;
+          default:
+            resultado = "Operación inválida";
+        }
+
+        document.getElementById("resultado").value = resultado;
+      }
+    </script>
+  </body>
+</html>

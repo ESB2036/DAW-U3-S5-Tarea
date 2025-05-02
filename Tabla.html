@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Tabla de Personas</title>
+    <script
+      src="https://kit.fontawesome.com/e68fc070ec.js"
+      crossorigin="anonymous"
+    ></script>
+    <!--link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"-->
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        background-color: #eef1f5;
+        padding: 40px;
+      }
+
+      .contenedor {
+        background-color: #fff;
+        padding: 20px;
+        border-radius: 10px;
+        max-width: 800px;
+        margin: auto;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      }
+
+      h1 {
+        text-align: center;
+        color: #333;
+      }
+
+      table {
+        width: 100%;
+        margin-top: 20px;
+        border-collapse: collapse;
+      }
+
+      th,
+      td {
+        border: 1px solid #ddd;
+        padding: 12px;
+        text-align: left;
+      }
+
+      th {
+        background-color: #f2f2f2;
+      }
+
+      .acciones {
+        text-align: center;
+      }
+
+      .icono {
+        font-size: 18px;
+        margin: 0 8px;
+        cursor: pointer;
+      }
+
+      .icono.ver {
+        color: #007bff;
+      }
+
+      .icono.ver:hover {
+        color: #0056b3;
+      }
+
+      .icono.eliminar {
+        color: #dc3545;
+      }
+
+      .icono.eliminar:hover {
+        color: #c82333;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="contenedor">
+      <li><a href="index.html">Ir al inicio</a></li>
+
+      <h1>Lista de Personas</h1>
+
+      <table id="tablaPersonas">
+        <thead>
+          <tr>
+            <th>Cédula</th>
+            <th>Nombre</th>
+            <th>Apellido</th>
+            <th>Fecha de nacimiento</th>
+            <th>Acciones</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>0101010101</td>
+            <td>Juan</td>
+            <td>Pérez</td>
+            <td>1990-04-15</td>
+            <td class="acciones">
+              <i
+                class="fas fa-eye icono ver"
+                title="Ver"
+                onclick="verPersona(this)"
+              ></i>
+              <i
+                class="fas fa-trash icono eliminar"
+                title="Eliminar"
+                onclick="eliminarFila(this)"
+              ></i>
+            </td>
+          </tr>
+          <tr>
+            <td>0202020202</td>
+            <td>María</td>
+            <td>Gómez</td>
+            <td>1985-11-22</td>
+            <td class="acciones">
+              <i
+                class="fas fa-eye icono ver"
+                title="Ver"
+                onclick="verPersona(this)"
+              ></i>
+              <i
+                class="fas fa-trash icono eliminar"
+                title="Eliminar"
+                onclick="eliminarFila(this)"
+              ></i>
+            </td>
+          </tr>
+          <tr>
+            <td>0303030303</td>
+            <td>Carlos</td>
+            <td>Rodríguez</td>
+            <td>2001-02-10</td>
+            <td class="acciones">
+              <i
+                class="fas fa-eye icono ver"
+                title="Ver"
+                onclick="verPersona(this)"
+              ></i>
+              <i
+                class="fas fa-trash icono eliminar"
+                title="Eliminar"
+                onclick="eliminarFila(this)"
+              ></i>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <script>
+      function eliminarFila(icono) {
+        const confirmar = confirm(
+          "¿Estás seguro de que deseas eliminar este registro?"
+        );
+        if (confirmar) {
+          const fila = icono.closest("tr");
+          fila.remove();
+        }
+      }
+
+      function verPersona(icono) {
+        const fila = icono.closest("tr");
+        const celdas = fila.querySelectorAll("td");
+        const cedula = celdas[0].textContent;
+        const nombre = celdas[1].textContent;
+        const apellido = celdas[2].textContent;
+        const fecha = celdas[3].textContent;
+
+        alert(
+          `Datos de la persona:\n\nCédula: ${cedula}\nNombre: ${nombre}\nApellido: ${apellido}\nFecha de nacimiento: ${fecha}`
+        );
+      }
+    </script>
+  </body>
+</html>

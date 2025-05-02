@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Registro con Edad y Eliminación</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+    />
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        background-color: #eef1f5;
+        padding: 40px;
+      }
+
+      .contenedor {
+        background-color: #fff;
+        padding: 20px;
+        border-radius: 10px;
+        max-width: 800px;
+        margin: auto;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      }
+
+      h1 {
+        text-align: center;
+        color: #333;
+      }
+
+      label {
+        display: block;
+        margin-top: 15px;
+        font-weight: bold;
+      }
+
+      input[type="text"],
+      input[type="date"] {
+        width: 100%;
+        padding: 10px;
+        margin-top: 5px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        font-size: 16px;
+        box-sizing: border-box;
+      }
+
+      button {
+        margin-top: 20px;
+        width: 100%;
+        padding: 10px;
+        font-size: 16px;
+        background-color: #28a745;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+      }
+
+      button:hover {
+        background-color: #218838;
+      }
+
+      table {
+        width: 100%;
+        margin-top: 30px;
+        border-collapse: collapse;
+      }
+
+      th,
+      td {
+        border: 1px solid #ddd;
+        padding: 12px;
+        text-align: left;
+      }
+
+      th {
+        background-color: #f2f2f2;
+      }
+
+      .icono-eliminar {
+        color: #dc3545;
+        font-size: 18px;
+        cursor: pointer;
+        text-align: center;
+      }
+
+      .icono-eliminar:hover {
+        color: #c82333;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="contenedor">
+      <li><a href="index.html">Ir al inicio</a></li>
+
+      <h1>Registro de Datos</h1>
+
+      <label for="cedula">Cédula:</label>
+      <input type="text" id="cedula" placeholder="Ingrese la cédula" />
+
+      <label for="nombre">Nombre:</label>
+      <input type="text" id="nombre" placeholder="Ingrese el nombre" />
+
+      <label for="apellido">Apellido:</label>
+      <input type="text" id="apellido" placeholder="Ingrese el apellido" />
+
+      <label for="fechaNacimiento">Fecha de nacimiento:</label>
+      <input type="date" id="fechaNacimiento" />
+
+      <button onclick="agregarFila()">Agregar a la tabla</button>
+
+      <table id="tablaDatos">
+        <thead>
+          <tr>
+            <th>Cédula</th>
+            <th>Nombre</th>
+            <th>Apellido</th>
+            <th>Fecha de nacimiento</th>
+            <th>Edad</th>
+            <th>Acciones</th>
+          </tr>
+        </thead>
+        <tbody>
+          <!-- Filas agregadas aparecerán aquí -->
+        </tbody>
+      </table>
+    </div>
+
+    <script>
+      function calcularEdad(fechaNacStr) {
+        const [año, mes, dia] = fechaNacStr.split("-").map(Number);
+        const hoy = new Date();
+        let edad = hoy.getFullYear() - año;
+
+        if (
+          hoy.getMonth() + 1 < mes ||
+          (hoy.getMonth() + 1 === mes && hoy.getDate() < dia)
+        ) {
+          edad--;
+        }
+
+        return edad;
+      }
+
+      function agregarFila() {
+        const cedula = document.getElementById("cedula").value.trim();
+        const nombre = document.getElementById("nombre").value.trim();
+        const apellido = document.getElementById("apellido").value.trim();
+        const fechaNacimiento =
+          document.getElementById("fechaNacimiento").value;
+
+        if (!cedula || !nombre || !apellido || !fechaNacimiento) {
+          alert("Por favor, complete todos los campos.");
+          return;
+        }
+
+        const edad = calcularEdad(fechaNacimiento);
+
+        const tabla = document
+          .getElementById("tablaDatos")
+          .getElementsByTagName("tbody")[0];
+        const nuevaFila = tabla.insertRow();
+
+        nuevaFila.insertCell(0).textContent = cedula;
+        nuevaFila.insertCell(1).textContent = nombre;
+        nuevaFila.insertCell(2).textContent = apellido;
+        nuevaFila.insertCell(3).textContent = fechaNacimiento;
+        nuevaFila.insertCell(4).textContent = edad + " años";
+
+        const celdaAcciones = nuevaFila.insertCell(5);
+        const icono = document.createElement("i");
+        icono.className = "fas fa-trash icono-eliminar";
+        icono.title = "Eliminar";
+        icono.onclick = function () {
+          const confirmar = confirm(
+            "¿Estás seguro de que deseas eliminar este registro?"
+          );
+          if (confirmar) {
+            tabla.deleteRow(nuevaFila.rowIndex - 1);
+          }
+        };
+        celdaAcciones.appendChild(icono);
+
+        // Limpiar campos
+        document.getElementById("cedula").value = "";
+        document.getElementById("nombre").value = "";
+        document.getElementById("apellido").value = "";
+        document.getElementById("fechaNacimiento").value = "";
+      }
+    </script>
+  </body>
+</html>
